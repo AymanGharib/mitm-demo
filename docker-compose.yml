@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  
+  mysql:
+    image: mysql:5.7
+    container_name: bwapp-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bWAPP
+    networks:
+      mitm-net:
+        ipv4_address: 172.28.0.5
+    volumes:
+      - bwapp-mysql-data:/var/lib/mysql
+
+  bwa:
+    image: raesene/bwapp
+    container_name: bwa
+    restart: always
+    networks:
+      mitm-net:
+        ipv4_address: 172.28.0.10
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"
+
+  kali:
+    image: kalilinux/kali-rolling
+    container_name: kali
+    privileged: true
+    networks:
+      mitm-net:
+        ipv4_address: 172.28.0.20
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+  
+  victim: 
+     image: debian
+     container_name: victim
+     privileged: true
+     networks:
+       mitm-net:
+         ipv4_address: 172.28.0.30
+     stdin_open: true 
+     tty: true
+     command: /bin/bash
+
+volumes:
+  bwapp-mysql-data:
+
+networks:
+  mitm-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
