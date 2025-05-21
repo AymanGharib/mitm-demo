@@ -78,7 +78,7 @@ Now you’re acting as the man in the middle.
 
 ```bash
 
-curl -d "login=bee&password=bug&security_level=0&form=submit" http://172.28.0.10/login.php      # HTTP traffic from bWAPP
+curl -d "login=bee&password=bug&security_level=0&form=submit" http://172.28.0.10/login.php    
 ``
 
 
