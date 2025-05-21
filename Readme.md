@@ -13,8 +13,26 @@ Simulate a **MitM attack** — for example, **ARP spoofing**, **HTTP sniffing**,
 
 Docker provides an ideal environment for simulating man-in-the-middle (MITM) attacks because it allows you to quickly create isolated, reproducible, and controlled network setups. By running multiple containers connected to a private Docker network, you can mimic real-world network interactions safely without risking your host system. Docker’s ability to assign static IPs and isolate network traffic makes it perfect for practicing ARP spoofing, HTTP sniffing, and other MITM techniques in a contained lab environment.
 
+```pgsql
++-------------------------+      +--------------------+       +---------------------+
+|       victim (172.28.0.30)      | <--> |      kali (172.28.0.20)  | <--> |       bwa (172.28.0.10)       |
+|    Debian container            |      | Kali Linux container |       |  bWAPP app container          |
++-------------------------+      +--------------------+       +---------------------+
+                                             |
+                                             |
+                                    +-------------------+
+                                    |  mysql (172.28.0.5)  |
+                                    |  MySQL DB container  |
+                                    +-------------------+
+
+- All containers connected via the 'mitm-net' Docker bridge network (subnet 172.28.0.0/24)
+- Kali acts as MITM between victim and bwa/mysql
+- Kali performs ARP spoofing to intercept traffic between victim and bwa/mysql
 
 
+
+
+```
 ## 🛠️ Step-by-Step Guide
 
 ### 1. ✅ Start the Environment
