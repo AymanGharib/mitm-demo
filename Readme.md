@@ -90,7 +90,7 @@ Still in Kali, use `tcpdump` to monitor traffic:
 ```bash
 tcpdump -i eth0 -A port 80        # HTTP traffic from bWAPP
 ```
-![image](screen5.png)
+![image](sceen5.png)
 
 
 ---
