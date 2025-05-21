@@ -15,8 +15,8 @@ Docker provides an ideal environment for simulating man-in-the-middle (MITM) att
 
 ```pgsql
 +-------------------------+      +--------------------+       +---------------------+
-|       victim (172.28.0.30)      | <--> |      kali (172.28.0.20)  | <--> |       bwa (172.28.0.10)       |
-|    Debian container            |      | Kali Linux container |       |  bWAPP app container          |
+|    victim (172.28.0.30)  | <--> | kali (172.28.0.20)  | <--> |  bwa (172.28.0.10)   |
+|    Debian container      |      | Kali Linux container|     |  bWAPP app container |
 +-------------------------+      +--------------------+       +---------------------+
                                              |
                                              |
